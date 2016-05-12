@@ -1,0 +1,57 @@
+﻿@{
+        string url = HttpContext.Current.Request.Url.AbsolutePath;
+        List<Category> categories = new List<Category>();
+        using (MShopDataContext context = new MShopDataContext())
+        {
+            categories = (from row in context.Categories select row).ToList();
+        }
+}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>@Page.Title</title>
+        @RenderSection("head", required: false)
+        <script src="https://code.jquery.com/jquery-2.2.2.js" integrity="sha256-4/zUCqiq0kqxhZIyp4G0Gk+AOtCJsY1TA00k5ClsZYE=" crossorigin="anonymous"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="~/js/bootstrap.js"></script>
+        <link href="~/css/bootstrap.css" rel="stylesheet" />
+        <link href="~/css/custom.css" rel="stylesheet" />
+    </head>
+    <body>
+        <!-- HEADER-->
+        <nav class="navbar navbar-default">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/">Brand</a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        @*<li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>*@
+                       @* <li><a href="#">Link</a></li>*@     
+                        @foreach (Category c in categories)
+                        {
+                            <li> <a href="/!/@c.navlink">@c.name</a></li>
+                        }                  
+                    </ul>                  
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+        <!-- END OF HEADER-->
+
+        <div class="container">
+            <!-- BODY -->
+            @RenderBody()
+            <!-- END OF BODY -->
+        </div>
+    </body>
+</html>

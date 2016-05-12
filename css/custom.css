@@ -1,0 +1,23 @@
+﻿.item1 {
+    border:1px solid lightgray;
+    text-align:center;   
+    margin:0 0 20px;
+}
+
+.item1 .image {
+    border-bottom:1px solid lightgray;
+        
+}
+@media (min-width: 1200px) {
+    .item1 .image {
+        border-bottom:1px solid lightgray;
+        height:220px;
+    }
+}
+
+@media (min-width: 992px) {
+    .item1 .image {
+        border-bottom:1px solid lightgray;
+        height:200px;
+    }
+}
